@@ -1,0 +1,526 @@
+/* ==========================================================================
+   Compact Signup Form Stylesheet
+   Pure Vanilla CSS3
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-light: #eef2ff;
+  --bg-gradient-start: #f8fafc;
+  --bg-gradient-end: #e2e8f0;
+  --surface: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --border-focus: #4f46e5;
+  
+  /* Status Colors */
+  --error: #ef4444;
+  --error-bg: #fef2f2;
+  --error-border: #f87171;
+  
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --success-border: #34d399;
+  
+  --warning: #f59e0b;
+  
+  /* Geometry & Shadows */
+  --radius-sm: 7px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-card: 0 12px 28px -8px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-input-focus: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  --shadow-error-focus: 0 0 0 3px rgba(239, 68, 68, 0.15);
+  --shadow-success-focus: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  
+  /* Transitions */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 15% 20%, rgba(79, 70, 229, 0.06) 0%, transparent 40%),
+              radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 40%),
+              linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  color: var(--text-main);
+  padding: 1rem;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Compact Container */
+.signup-container {
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+}
+
+/* Card Surface */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.4rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.card-header {
+  text-align: center;
+  margin-bottom: 1.1rem;
+}
+
+.badge-icon {
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 0.5rem auto;
+  border-radius: 9px;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2rem;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 0.85rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.3rem;
+}
+
+.required {
+  color: var(--error);
+}
+
+/* Input Wrapper & Icons */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 11px;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: color var(--transition-fast);
+}
+
+.input-wrapper input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.88rem;
+  color: var(--text-main);
+  background-color: #f8fafc;
+  border: 1.25px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 2.2rem;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.input-wrapper input::placeholder {
+  color: #94a3b8;
+  font-size: 0.82rem;
+}
+
+.input-wrapper input:hover {
+  border-color: #94a3b8;
+}
+
+.input-wrapper input:focus {
+  background-color: var(--surface);
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-input-focus);
+}
+
+.form-group:focus-within .input-icon {
+  color: var(--primary);
+}
+
+/* Password Toggle Button */
+.toggle-password {
+  position: absolute;
+  right: 9px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 4px;
+  transition: color var(--transition-fast);
+}
+
+.toggle-password:hover {
+  color: var(--text-main);
+}
+
+.toggle-password:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+/* Inline Validation States */
+.form-group.has-error input {
+  border-color: var(--error-border);
+  background-color: var(--error-bg);
+}
+
+.form-group.has-error input:focus {
+  box-shadow: var(--shadow-error-focus);
+}
+
+.form-group.has-error .input-icon {
+  color: var(--error);
+}
+
+.form-group.has-success input {
+  border-color: var(--success-border);
+  background-color: var(--success-bg);
+}
+
+.form-group.has-success input:focus {
+  box-shadow: var(--shadow-success-focus);
+}
+
+.form-group.has-success .input-icon {
+  color: var(--success);
+}
+
+/* Error Message (Inline) */
+.error-message {
+  display: none;
+  color: var(--error);
+  font-size: 0.74rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  padding-left: 2px;
+  align-items: center;
+  gap: 4px;
+  animation: slideDown 0.15s ease-out;
+}
+
+.form-group.has-error .error-message {
+  display: flex;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Compact Password Strength Indicator
+   ========================================================================== */
+
+.strength-container {
+  margin-top: 0.5rem;
+  background: #f8fafc;
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #e2e8f0;
+}
+
+.strength-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.74rem;
+  margin-bottom: 0.35rem;
+}
+
+.strength-title {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.strength-status {
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: capitalize;
+  transition: color var(--transition-fast);
+}
+
+/* Strength Meter Segment Bars */
+.strength-meter {
+  display: flex;
+  gap: 4px;
+  height: 4px;
+  margin-bottom: 0.45rem;
+}
+
+.strength-meter .bar {
+  flex: 1;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  transition: background-color var(--transition-normal);
+}
+
+/* Dynamic Strength Color Levels */
+.strength-weak #bar-1 { background-color: var(--error); }
+.strength-weak .strength-status { color: var(--error); }
+
+.strength-fair #bar-1,
+.strength-fair #bar-2 { background-color: var(--warning); }
+.strength-fair .strength-status { color: var(--warning); }
+
+.strength-good #bar-1,
+.strength-good #bar-2,
+.strength-good #bar-3 { background-color: #3b82f6; }
+.strength-good .strength-status { color: #3b82f6; }
+
+.strength-strong #bar-1,
+.strength-strong #bar-2,
+.strength-strong #bar-3,
+.strength-strong #bar-4 { background-color: var(--success); }
+.strength-strong .strength-status { color: var(--success); }
+
+/* Password Criteria Checklist */
+.strength-criteria {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 0.4rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 340px) {
+  .strength-criteria {
+    grid-template-columns: 1fr;
+  }
+}
+
+.criterion {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color var(--transition-fast);
+}
+
+.criterion .check-icon {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #94a3b8;
+  display: inline-block;
+  width: 12px;
+}
+
+.criterion.valid {
+  color: #15803d;
+  font-weight: 600;
+}
+
+.criterion.valid .check-icon {
+  color: var(--success);
+}
+
+/* ==========================================================================
+   Submit Button & Actions
+   ========================================================================== */
+
+.submit-btn {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.65rem 1rem;
+  background: var(--primary);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all var(--transition-fast);
+  box-shadow: 0 3px 10px rgba(79, 70, 229, 0.22);
+}
+
+.submit-btn:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 5px 14px rgba(79, 70, 229, 0.3);
+  transform: translateY(-1px);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+.submit-btn:focus-visible {
+  outline: 2.5px solid rgba(79, 70, 229, 0.4);
+  outline-offset: 1px;
+}
+
+.btn-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.submit-btn:hover .btn-arrow {
+  transform: translateX(2px);
+}
+
+/* Spinner during submit simulation */
+.btn-spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Footer Link */
+.card-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Success State View
+   ========================================================================== */
+
+.success-card {
+  text-align: center;
+  padding: 1.75rem 1.4rem;
+}
+
+.success-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--success-bg);
+  border: 1.75px solid var(--success-border);
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.35rem;
+}
+
+.success-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.success-desc strong {
+  color: var(--text-main);
+  word-break: break-all;
+}
+
+.secondary-btn {
+  background: #f1f5f9;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.secondary-btn:hover {
+  background: #e2e8f0;
+}
